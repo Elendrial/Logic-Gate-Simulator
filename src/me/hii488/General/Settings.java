@@ -1,4 +1,4 @@
-package me.hii488.General;
+package me.hii488.general;
 
 public class Settings {
 	

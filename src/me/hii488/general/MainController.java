@@ -7,7 +7,7 @@ import me.hii488.window.Window;
 public class MainController {
 	
 	public static void main(String[] args){
-		
+		startProgram();
 	}
 	
 	

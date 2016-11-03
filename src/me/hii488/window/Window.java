@@ -3,10 +3,14 @@ package me.hii488.window;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import me.hii488.general.MainController;
 import me.hii488.general.Settings;
@@ -14,7 +18,7 @@ import me.hii488.general.Settings;
 public class Window implements Runnable {
 
 	// Actual window
-	public JFrame frame;
+	public JFrame gridFrame;
 	public Display display;
 
 	public int width, height;
@@ -22,43 +26,69 @@ public class Window implements Runnable {
 
 	// How often we want the game to tick per second
 	public int targetTPS;
+	
+	// GUI elements
+	public JMenuBar menuBar;
+	public JMenu file = new JMenu("File"), other = new JMenu("Other");
+	public JMenuItem createNew = new JMenuItem("New", KeyEvent.VK_N), open = new JMenuItem("Open", KeyEvent.VK_O), save = new JMenuItem("Save", KeyEvent.VK_S), Exit = new JMenuItem("Exit", KeyEvent.VK_E);
+	public JMenuItem prefs = new JMenuItem("Preferences", KeyEvent.VK_P);
+	
 
-	public boolean isRunning;
-
-	public Window(String title, int width, int height) {
+ 	public Window(String title, int width, int height) {
 		// Set the variables
 		this.title = title;
 		this.width = width;
 		this.height = height;
 
 		// Setup Window
-		this.frame = new JFrame(title);
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.getContentPane().setPreferredSize(new Dimension(width, height));
-		this.frame.setResizable(false);
-		this.frame.pack();
-		this.frame.setLocationRelativeTo(null);
-		this.frame.setVisible(true);
-
+		this.gridFrame = new JFrame(title);
+		this.gridFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.gridFrame.getContentPane().setPreferredSize(new Dimension(width, height));
+		
+		createGUI();
+		
+		this.gridFrame.setResizable(true);
+		this.gridFrame.pack();
+		this.gridFrame.setLocationRelativeTo(null);
+		this.gridFrame.setVisible(true);
 	}
 	
-	public void createDisplay(){
+	public void createGUI(){
 		this.display = new Display(this);
 		display.addKeyListener(MainController.inputListener);
 		display.addMouseListener(MainController.inputListener);
-		this.frame.add(this.display);
+		this.gridFrame.add(this.display);
+		
+		// GUI Stuff
+		menuBar = new JMenuBar();
+		
+		menuBar.add(file);
+		menuBar.add(other);
+		
+		createNew.addActionListener(MainController.inputListener);
+		file.add(createNew);
+		
+		open.addActionListener(MainController.inputListener);
+		file.add(open);
+		
+		save.addActionListener(MainController.inputListener);
+		file.add(save);
+		
+		file.addSeparator();
+		
+		Exit.addActionListener(MainController.inputListener);
+		file.add(Exit);
+		
+		
+		this.gridFrame.setJMenuBar(menuBar);
 	}
 
 	public void start() {
-		isRunning = true;
-		frame.requestFocus();
+		gridFrame.requestFocus();
 		new Thread(this).start();
 	}
 
-	public void stop() {
-		isRunning = false;
-	}
-
+	
 	private void render() {
 		// Buffer Strategy
 		BufferStrategy bs = this.display.getBufferStrategy();
@@ -81,7 +111,7 @@ public class Window implements Runnable {
 		g.dispose();
 		bs.show();
 	}
-
+	
 	
 	
 	// FPS should happen as fast as it can, since it renders (only important if
@@ -116,7 +146,7 @@ public class Window implements Runnable {
 		}
 		
 		// When the gameloop is finished running, close the program
-		this.frame.dispatchEvent(new WindowEvent(this.frame, WindowEvent.WINDOW_CLOSING));
+		this.gridFrame.dispatchEvent(new WindowEvent(this.gridFrame, WindowEvent.WINDOW_CLOSING));
 
 	}
 }
