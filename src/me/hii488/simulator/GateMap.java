@@ -14,15 +14,16 @@ public class GateMap {
 	private boolean lastOutput = false;
 	
 	public void init(){
+		Layer inputLayer = new Layer();
 		if(mapInputs > 0){
 			inputs = new boolean[mapInputs];
-			Layer inputLayer = new Layer();
 			for(int i = 0; i < mapInputs; i++){
 				DummyGate d = new DummyGate();
 				d.ID = i;
 				inputLayer.gates.add(d);
 			}
 		}
+		gateLayers.add(inputLayer);
 	}
 	
 	public void update(){
