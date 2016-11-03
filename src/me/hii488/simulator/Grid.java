@@ -3,7 +3,7 @@ package me.hii488.simulator;
 import java.awt.Point;
 import java.util.HashMap;
 
-import me.hii488.General.Settings;
+import me.hii488.general.Settings;
 import me.hii488.logicGates.LogicGate;
 
 public class Grid {
