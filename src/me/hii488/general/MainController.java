@@ -18,7 +18,7 @@ public class MainController {
 	
 	public static void startProgram(){
 		running = true;
-		mainWindow = new Window("Logic Gate Simulator", 800, 500);
+		mainWindow = new Window("Logic Gate Simulator", 1200, 750);
 		mainWindow.start();
 	}
 	

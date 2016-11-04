@@ -1,5 +1,6 @@
 package me.hii488.window;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -7,10 +8,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
 
 import me.hii488.general.MainController;
 import me.hii488.general.Settings;
@@ -33,7 +36,11 @@ public class Window implements Runnable {
 	public JMenuItem createNew = new JMenuItem("New", KeyEvent.VK_N), open = new JMenuItem("Open", KeyEvent.VK_O), save = new JMenuItem("Save", KeyEvent.VK_S), Exit = new JMenuItem("Exit", KeyEvent.VK_E);
 	public JMenuItem prefs = new JMenuItem("Preferences", KeyEvent.VK_P);
 	
-
+	public JToolBar topBar = new JToolBar(), logicBar = new JToolBar();
+	public JButton moveTool = new JButton("Move"), addTool = new JButton("Add"), removeTool = new JButton("Remove"), connectTool = new JButton("Connect");
+	public JButton notGate = new JButton("Not"), orGate = new JButton("Or"), andGate = new JButton("And"), xorGate = new JButton("XOr");
+	public JButton input = new JButton("Input");
+	
  	public Window(String title, int width, int height) {
 		// Set the variables
 		this.title = title;
@@ -59,7 +66,8 @@ public class Window implements Runnable {
 		display.addMouseListener(MainController.inputListener);
 		this.gridFrame.add(this.display);
 		
-		// GUI Stuff
+	// GUI Stuff
+		// Menu Bar
 		menuBar = new JMenuBar();
 		
 		menuBar.add(file);
@@ -79,8 +87,40 @@ public class Window implements Runnable {
 		Exit.addActionListener(MainController.inputListener);
 		file.add(Exit);
 		
-		
 		this.gridFrame.setJMenuBar(menuBar);
+		
+		
+		// Tool Bar
+		addTool.addActionListener(MainController.inputListener);
+		topBar.add(addTool);
+		
+		moveTool.addActionListener(MainController.inputListener);
+		topBar.add(moveTool);
+		
+		removeTool.addActionListener(MainController.inputListener);
+		topBar.add(removeTool);
+		
+		connectTool.addActionListener(MainController.inputListener);
+		topBar.add(connectTool);
+		
+		this.gridFrame.add(topBar, BorderLayout.PAGE_START);
+		
+		input.addActionListener(MainController.inputListener);
+		logicBar.add(input);
+		
+		logicBar.addSeparator();
+		
+		notGate.addActionListener(MainController.inputListener);
+		logicBar.add(notGate);
+		
+		orGate.addActionListener(MainController.inputListener);
+		logicBar.add(orGate);
+
+		andGate.addActionListener(MainController.inputListener);
+		logicBar.add(andGate);
+		
+		this.gridFrame.add(logicBar, BorderLayout.PAGE_END);
+		
 	}
 
 	public void start() {
