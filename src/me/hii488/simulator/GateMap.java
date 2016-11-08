@@ -60,6 +60,12 @@ public class GateMap {
 		public boolean output(boolean[] inputs) {
 			return fixedOutput;
 		}
+
+		@Override
+		public DummyGate clone() {
+			// TODO Auto-generated method stub
+			return new DummyGate();
+		}
 		
 	}
 	

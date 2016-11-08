@@ -1,12 +1,14 @@
 package me.hii488.logicGates.simple;
 
 import me.hii488.logicGates.LogicGate;
+import me.hii488.window.GuiInternalsBridge;
 
 public class AndGate extends LogicGate {
 
 	public AndGate(){
 		this.maxInputs = -1;
 		this.name = "Or";
+		this.gateType = GuiInternalsBridge.Gate.and;
 	}
 	
 	@Override
@@ -18,6 +20,11 @@ public class AndGate extends LogicGate {
 			if(!b) output = false;
 		
 		return output;
+	}
+
+	@Override
+	public AndGate clone() {
+		return new AndGate();
 	}
 
 }

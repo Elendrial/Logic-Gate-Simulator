@@ -1,6 +1,6 @@
 package me.hii488.logicGates;
 
-import java.awt.Image;
+import me.hii488.window.GuiInternalsBridge;
 
 public abstract class LogicGate {
 	
@@ -8,7 +8,7 @@ public abstract class LogicGate {
 	public int maxInputs = -1;
 	public boolean lastOutput;
 	
-	public Image icon;
+	public GuiInternalsBridge.Gate gateType;
 	protected String name;
 	public int ID;
 	public int[] inputIDs;
@@ -24,5 +24,7 @@ public abstract class LogicGate {
 	public String getName(){
 		return name;
 	}
+	
+	public abstract LogicGate clone();
 	
 }

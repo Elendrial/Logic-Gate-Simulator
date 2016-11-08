@@ -21,5 +21,10 @@ public class CompoundGate extends LogicGate{
 		gm.inputs = this.input;
 		return gm.output();
 	}
+
+	@Override
+	public CompoundGate clone() {
+		return new CompoundGate();
+	}
 	
 }

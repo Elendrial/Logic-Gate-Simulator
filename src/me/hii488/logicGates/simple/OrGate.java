@@ -1,12 +1,14 @@
 package me.hii488.logicGates.simple;
 
 import me.hii488.logicGates.LogicGate;
+import me.hii488.window.GuiInternalsBridge;
 
 public class OrGate extends LogicGate{
 	
 	public OrGate(){
 		this.maxInputs = -1;
 		this.name = "Or";
+		this.gateType = GuiInternalsBridge.Gate.or;
 	}
 	
 	@Override
@@ -18,5 +20,10 @@ public class OrGate extends LogicGate{
 			if(b) output = true;
 		
 		return output;
+	}
+
+	@Override
+	public OrGate clone() {
+		return new OrGate();
 	}
 }

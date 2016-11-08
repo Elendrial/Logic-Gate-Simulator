@@ -22,5 +22,12 @@ public class Input extends LogicGate implements Toggleable{
 		output = !output;
 		Circuit.update();
 	}
+
+	@Override
+	public Input clone() {
+		return new Input();
+	}
+	
+	
 	
 }
