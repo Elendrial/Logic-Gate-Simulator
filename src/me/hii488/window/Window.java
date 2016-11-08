@@ -61,9 +61,10 @@ public class Window implements Runnable {
 	}
 	
 	public void createGUI(){
-		this.display = new Display(this);
+		this.display = new Display();
 		display.addKeyListener(MainController.inputListener);
 		display.addMouseListener(MainController.inputListener);
+		display.addMouseMotionListener(MainController.inputListener);
 		this.gridFrame.add(this.display);
 		
 	// GUI Stuff
@@ -141,11 +142,11 @@ public class Window implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 
 		// Clear the graphics
-		g.clearRect(0, 0, width, height);
+		g.clearRect(0, 0, this.gridFrame.getWidth(), this.gridFrame.getHeight());
 
 		// Draw the display
-		g.setColor(Color.black);
-		g.fillRect(0, 0, width, height);
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(0, 0, this.gridFrame.getWidth(), this.gridFrame.getHeight());
 		this.display.render(g);
 
 		g.dispose();

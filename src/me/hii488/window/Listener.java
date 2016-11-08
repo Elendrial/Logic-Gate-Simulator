@@ -15,6 +15,8 @@ import me.hii488.simulator.Circuit;
 
 public class Listener implements MouseListener, MouseMotionListener, KeyListener, ActionListener, ItemListener{
 
+	public static int mouseX=0, mouseY=0;
+	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		
@@ -37,7 +39,8 @@ public class Listener implements MouseListener, MouseMotionListener, KeyListener
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		
+		mouseX = arg0.getX();
+		mouseY = arg0.getY();
 	}
 
 	@Override
