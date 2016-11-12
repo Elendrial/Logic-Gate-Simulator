@@ -19,12 +19,22 @@ public class Grid {
 	private HashMap<Point, LogicGate> grid = new HashMap<Point, LogicGate>();
 	
 	public void addLogicGate(LogicGate l, Point p){
-		grid.put(p, l);
-		if(Settings.DEBUG) System.out.println("Logic Gate \"" + l.getName() + "\" added to point: " + p.toString()); 
+		if(!grid.containsKey(p)){
+			grid.put(p, l);
+			if(Settings.DEBUG) System.out.println("Logic Gate \"" + l.getName() + "\" added to point: " + p.toString()); 
+		}
 	}
 	
 	public void removeLogicGate(Point p){
-		grid.remove(p);
+		
+		boolean found = false;
+		for(int i = 0; i <=1 && !found; i++)
+			for(int j = 0; j <=1 && !found; j++){
+				if(grid.containsKey(new Point(p.x+ i, p.y + j))){
+					grid.remove(new Point(p.x+ i, p.y + j));
+					found = true;
+				}
+			}
 	}
 	
 	public boolean setDimensions(int newWidth, int newHeight){
@@ -59,9 +69,9 @@ public class Grid {
 		g.setColor(c);
 		
 		for(Point p : grid.keySet()){
-			g.drawImage(GuiInternalsBridge.gates, 
-					p.x-20, p.y-20, p.x+20, p.y+20, 
-					grid.get(p).gateType.iconXPos, 000, grid.get(p).gateType.iconXPos + 320, 300, null);
+			if(grid.get(p).gateType.iconXPos > 0){
+				g.drawImage(GuiInternalsBridge.gates, p.x*20-18, p.y*20-18, p.x*20+22, p.y*20+22, grid.get(p).gateType.iconXPos, 000, grid.get(p).gateType.iconXPos + 320, 300, null);
+			}
 		}
 		
 		

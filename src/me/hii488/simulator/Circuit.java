@@ -28,5 +28,9 @@ public class Circuit {
 		grid.addLogicGate(l, p);
 		
 	}
+
+	public static void removeGate(Point point) {
+		grid.removeLogicGate(point);
+	}
 	
 }

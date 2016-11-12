@@ -45,8 +45,15 @@ public class Listener implements MouseListener, MouseMotionListener, KeyListener
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(GuiInternalsBridge.selectedTool == GuiInternalsBridge.Tool.add){
+		switch(GuiInternalsBridge.selectedTool){
+		default:
+			break;
+		case add:
 			GuiInternalsBridge.placeGate();
+			break;
+		case remove:
+			GuiInternalsBridge.removeGate();
+			break;
 		}
 	}
 

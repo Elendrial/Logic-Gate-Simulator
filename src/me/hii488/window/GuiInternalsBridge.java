@@ -56,7 +56,11 @@ public class GuiInternalsBridge {
 	}
 	
 	public static void placeGate(){
-		Circuit.addGate(selectedGate.l, new Point(Listener.mouseX/20, Listener.mouseY/20));
+		Circuit.addGate(selectedGate.getGate(), new Point(Listener.mouseX/20, Listener.mouseY/20));
+	}
+	
+	public static void removeGate(){
+		Circuit.removeGate(new Point(Listener.mouseX/20, Listener.mouseY/20));
 	}
 	
 }
